@@ -1,0 +1,58 @@
+.profileHeader {
+  background: linear-gradient(135deg,var(--dark),var(--brown));
+  padding: 24px 20px; border-radius: 20px; margin-bottom: 16px;
+  color: #fff; display: flex; align-items: center; gap: 16px;
+}
+.avatar {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--gold); color: var(--dark);
+  font-size: 1.5rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.uName { font-weight: 700; font-size: 1.1rem; }
+.uPhone { font-size: .85rem; color: rgba(255,255,255,.7); }
+.adminTag {
+  background: var(--gold); color: var(--dark);
+  border-radius: 20px; padding: 2px 10px;
+  font-size: .72rem; font-weight: 800;
+  display: inline-block; margin-top: 4px;
+}
+
+.pointsCard {
+  background: linear-gradient(135deg,var(--gold),#e8a800);
+  border-radius: 16px; padding: 16px 20px; margin-bottom: 16px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.pointsLabel { font-size: .8rem; font-weight: 600; color: var(--brown); opacity: .8; }
+.pointsVal { font-size: 2rem; font-weight: 900; color: var(--brown); }
+.pointsSub { font-size: .75rem; color: var(--brown); opacity: .7; }
+
+.sectionLabel {
+  font-size: .75rem; text-transform: uppercase;
+  letter-spacing: 1.5px; color: var(--muted);
+  font-weight: 700; margin: 16px 0 10px;
+}
+
+.adminBtn {
+  width: 100%; background: var(--dark); color: #fff;
+  border: none; border-radius: 50px; padding: 12px;
+  font-size: .9rem; font-weight: 700; cursor: pointer; margin-bottom: 4px;
+  transition: background .2s;
+}
+.adminBtn:hover { background: #2a1a0f; }
+
+.orderCard { background: #f9f4ef; border-radius: 14px; padding: 14px; margin-bottom: 10px; }
+.orderTop { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.orderId { font-size: .78rem; color: var(--muted); }
+.orderAmt { font-weight: 800; color: var(--red); }
+.orderItems { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+.orderDate { font-size: .75rem; color: var(--muted); margin-top: 4px; }
+
+.logoutBtn {
+  width: 100%; background: transparent;
+  border: 2px solid #e8ddd4; border-radius: 50px;
+  padding: 12px; font-size: .9rem; font-weight: 700;
+  cursor: pointer; color: var(--muted); margin-top: 16px;
+  transition: all .2s;
+}
+.logoutBtn:hover { border-color: var(--red); color: var(--red); }

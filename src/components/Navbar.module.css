@@ -1,0 +1,41 @@
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(24,16,10,.97);
+  backdrop-filter: blur(14px);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px; height: 58px; gap: 8px;
+}
+.logo {
+  font-family: 'Fraunces', serif;
+  font-size: 1.25rem; font-weight: 900;
+  color: var(--gold); letter-spacing: .5px;
+}
+.logo span { color: var(--red); }
+.right { display: flex; align-items: center; gap: 8px; }
+.loginBtn {
+  background: transparent; color: var(--gold);
+  border: 1.5px solid var(--gold); border-radius: 30px;
+  padding: 7px 14px; font-size: .82rem; font-weight: 700;
+  cursor: pointer; transition: all .2s; white-space: nowrap;
+}
+.loginBtn:hover { background: var(--gold); color: var(--dark); }
+.avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--gold); color: var(--dark);
+  border: none; font-weight: 800; font-size: .9rem;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.cartBtn {
+  background: var(--red); color: #fff; border: none;
+  border-radius: 30px; padding: 7px 14px;
+  font-size: .85rem; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; gap: 5px;
+  transition: background .2s;
+}
+.cartBtn:hover { background: var(--red2); }
+.badge {
+  background: var(--gold); color: var(--dark);
+  border-radius: 50%; width: 19px; height: 19px;
+  font-size: .7rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+}

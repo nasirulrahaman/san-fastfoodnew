@@ -1,0 +1,22 @@
+{
+  "name": "SAN Fastfood",
+  "short_name": "SAN Fastfood",
+  "description": "Premium Taste, Fast Delivery - Swaad Aisa ki Ghar jaisa",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#18100A",
+  "theme_color": "#18100A",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

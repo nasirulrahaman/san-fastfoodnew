@@ -1,0 +1,11 @@
+.infoSec { background: var(--dark); padding: 60px 20px; }
+.inner { max-width: 860px; margin: 0 auto; }
+.title { font-family: 'Fraunces', serif; font-size: clamp(1.7rem,5vw,2.3rem); font-weight: 900; color: #fff; text-align: center; margin-bottom: 34px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 20px; }
+.card { background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.09); border-radius: 20px; padding: 22px; }
+.ico { font-size: 1.9rem; margin-bottom: 10px; }
+.card h3 { font-size: .75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 7px; }
+.card p { font-size: .9rem; color: rgba(255,255,255,.72); line-height: 1.7; }
+.footer { background: var(--brown); color: rgba(255,255,255,.65); text-align: center; padding: 22px 20px; font-size: .83rem; line-height: 1.9; }
+.footer strong { color: var(--gold); }
+.footer small { color: rgba(255,255,255,.35); }

@@ -1,0 +1,2 @@
+.error { color: var(--red); font-size: .85rem; margin: -6px 0 10px; }
+.note { font-size: .78rem; color: var(--muted); text-align: center; margin-top: 12px; }
