@@ -1,23 +1,36 @@
-import { AppProvider } from './context/AppContext'
+import { AppProvider, useApp } from './context/AppContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import MenuSection from './components/MenuSection'
+import Reviews from './components/Reviews'
 import DrawerManager from './components/DrawerManager'
 import FloatingCart from './components/FloatingCart'
 import Footer from './components/Footer'
 import Toast from './components/Toast'
+import { useNotifications } from './hooks/useNotifications'
 import './index.css'
 
-export default function App() {
+function AppInner() {
+  const { user } = useApp()
+  useNotifications(user)
   return (
-    <AppProvider>
+    <>
       <Navbar />
       <Hero />
       <MenuSection />
+      <Reviews />
       <Footer />
       <DrawerManager />
       <FloatingCart />
       <Toast />
+    </>
+  )
+}
+
+export default function App() {
+  return (
+    <AppProvider>
+      <AppInner />
     </AppProvider>
   )
 }

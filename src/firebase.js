@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
+import { getMessaging, getToken, onMessage } from 'firebase/messaging'
 
 const firebaseConfig = {
   apiKey: "AIzaSyA2qxYnkqDjG5tux32pBu8nZjRSQdYTq74",
@@ -12,3 +13,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 export const db = getFirestore(app)
+
+// Messaging (push notifications)
+let messaging = null
+try {
+  messaging = getMessaging(app)
+} catch {}
+export { messaging, getToken, onMessage }

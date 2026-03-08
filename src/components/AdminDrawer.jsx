@@ -7,6 +7,15 @@ import {
 } from 'firebase/firestore'
 import styles from './AdminDrawer.module.css'
 
+// Zomato-style notification templates
+const NOTIF_TEMPLATES = [
+  { label: '🔥 Flash Sale', title: 'Flash Sale at SAN Fastfood!', body: '50% OFF on Biryani for next 2 hours only! Order now 🍚' },
+  { label: '🎉 New Item', title: 'New Item Added!', body: 'Try our NEW Kurkure Momo — crispy, spicy & delicious! 🥟' },
+  { label: '⏰ Lunch Time', title: 'Hungry? 😋', body: 'It\'s lunch time! Order fresh Biryani & get it delivered hot 🍗' },
+  { label: '🌙 Evening Snacks', title: 'Evening Snacks Time!', body: 'Momos, French Fries & more — order your evening snacks now! 🍟' },
+  { label: '🏷️ Coupon Alert', title: 'Special Coupon for You!', body: 'Use code SAN20 and get 20% OFF on your next order! 🎁' },
+]
+
 export default function AdminDrawer() {
   const { showToast, setOfferBanner } = useApp()
   const [coupons, setCoupons] = useState([])
@@ -14,12 +23,17 @@ export default function AdminDrawer() {
   const [offerMsg, setOfferMsg] = useState('')
   const [offerCode, setOfferCode] = useState('')
 
-  // New coupon form
+  // Coupon form
   const [code, setCode] = useState('')
   const [type, setType] = useState('percent')
   const [value, setValue] = useState('')
   const [minOrder, setMinOrder] = useState('')
   const [expiry, setExpiry] = useState('')
+
+  // Notification form
+  const [notifTitle, setNotifTitle] = useState('')
+  const [notifBody, setNotifBody] = useState('')
+  const [sending, setSending] = useState(false)
 
   useEffect(() => {
     loadCoupons()
@@ -78,8 +92,68 @@ export default function AdminDrawer() {
     loadCoupons()
   }
 
+  const applyTemplate = (t) => {
+    setNotifTitle(t.title)
+    setNotifBody(t.body)
+  }
+
+  const sendNotification = async () => {
+    if (!notifTitle.trim() || !notifBody.trim()) {
+      showToast('⚠️ Enter title and message')
+      return
+    }
+    setSending(true)
+    try {
+      // Save notification to Firestore — your backend/Cloud Function will send it
+      await addDoc(collection(db, 'notifications'), {
+        title: notifTitle,
+        body: notifBody,
+        sentAt: serverTimestamp(),
+        status: 'pending'
+      })
+      showToast('✅ Notification queued!')
+      setNotifTitle('')
+      setNotifBody('')
+    } catch (e) {
+      showToast('❌ Failed: ' + e.message)
+    }
+    setSending(false)
+  }
+
   return (
     <>
+      {/* Send Notification */}
+      <div className={styles.card}>
+        <h3>🔔 Send Notification</h3>
+        <p className={styles.hint}>Send offers & updates to all customers</p>
+
+        {/* Quick templates */}
+        <div className={styles.templates}>
+          {NOTIF_TEMPLATES.map(t => (
+            <button key={t.label} className={styles.templateBtn} onClick={() => applyTemplate(t)}>
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        <input
+          className={styles.input}
+          value={notifTitle}
+          onChange={e => setNotifTitle(e.target.value)}
+          placeholder="Title e.g. Flash Sale! 🔥"
+        />
+        <textarea
+          className={styles.textarea}
+          value={notifBody}
+          onChange={e => setNotifBody(e.target.value)}
+          placeholder="Message e.g. 20% OFF on all orders today! Use code SAN20"
+          rows={3}
+        />
+        <button className={styles.btn} onClick={sendNotification} disabled={sending}>
+          {sending ? 'Sending…' : '📤 Send to All Customers'}
+        </button>
+      </div>
+
       {/* Offer Banner */}
       <div className={styles.card}>
         <h3>🎉 Offer Banner</h3>

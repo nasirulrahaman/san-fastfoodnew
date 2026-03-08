@@ -48,7 +48,7 @@ export default function Hero() {
         <p className={styles.hindi}>Swaad Aisa ki Ghar jaisa 🏠</p>
         <div className={styles.btns}>
           <a href="#menu" className="btn-primary">🍽️ Order Now</a>
-          <a href="https://wa.me/917001728030" target="_blank" rel="noreferrer" className="btn-secondary">
+          <a href="https://wa.me/918293062407" target="_blank" rel="noreferrer" className="btn-secondary">
             💬 WhatsApp Us
           </a>
         </div>
