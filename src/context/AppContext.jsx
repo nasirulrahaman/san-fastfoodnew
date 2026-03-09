@@ -135,6 +135,7 @@ export function AppProvider({ children }) {
       total,
       coupon: appliedCoupon?.code || null,
       uid: user?.uid || 'guest',
+      status: 'pending',
       createdAt: serverTimestamp(),
     }
     try {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useApp } from '../context/AppContext'
 import { db } from '../firebase'
 import {
@@ -15,9 +15,13 @@ export default function Reviews() {
   const [rating, setRating] = useState(0)
   const [hovered, setHovered] = useState(0)
   const [comment, setComment] = useState('')
+  const [photo, setPhoto] = useState(null)
+  const [photoPreview, setPhotoPreview] = useState(null)
+  const [uploading, setUploading] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [showLoginHint, setShowLoginHint] = useState(false)
+  const fileRef = useRef()
 
   useEffect(() => { loadReviews() }, [])
 
@@ -35,20 +39,45 @@ export default function Reviews() {
     setShowForm(true)
   }
 
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+    if (file.size > 5 * 1024 * 1024) { showToast('⚠️ Photo must be under 5MB'); return }
+    setPhoto(file)
+    setPhotoPreview(URL.createObjectURL(file))
+  }
+
+  const uploadPhoto = async (file) => {
+    // Convert to base64 and store directly in Firestore (works without any API key)
+    return new Promise((resolve) => {
+      const reader = new FileReader()
+      reader.onload = (e) => resolve(e.target.result)
+      reader.onerror = () => resolve(null)
+      reader.readAsDataURL(file)
+    })
+  }
+
   const submitReview = async () => {
     if (!rating) { showToast('⚠️ Please select a rating!'); return }
     if (!comment.trim()) { showToast('⚠️ Please write something!'); return }
     setSubmitting(true)
+    let photoUrl = null
+    if (photo) {
+      setUploading(true)
+      try { photoUrl = await uploadPhoto(photo) } catch {}
+      setUploading(false)
+    }
     try {
       await addDoc(collection(db, 'reviews'), {
         name: user.name || 'Customer',
         phone: user.phone,
         rating,
         comment: comment.trim(),
+        photoUrl,
         createdAt: serverTimestamp(),
       })
       showToast('✅ Review submitted! Thank you 🙏')
-      setRating(0); setComment(''); setShowForm(false)
+      setRating(0); setComment(''); setPhoto(null); setPhotoPreview(null); setShowForm(false)
       loadReviews()
     } catch { showToast('❌ Failed to submit') }
     setSubmitting(false)
@@ -70,7 +99,6 @@ export default function Reviews() {
         <h2 className={styles.title}>What Our Customers Say</h2>
         <p className={styles.sub}>Real reviews from real foodies 🍽️</p>
 
-        {/* Summary */}
         {reviews.length > 0 && (
           <div className={styles.summary}>
             <div className={styles.avgBox}>
@@ -96,31 +124,22 @@ export default function Reviews() {
           </div>
         )}
 
-        {/* Write review button */}
         {!showForm && (
           <div className={styles.writeWrap}>
-            <button className={styles.writeBtn} onClick={handleWriteReview}>
-              ✍️ Write a Review
-            </button>
-            {showLoginHint && (
-              <p className={styles.loginHint}>⚠️ Please login first to write a review!</p>
-            )}
+            <button className={styles.writeBtn} onClick={handleWriteReview}>✍️ Write a Review</button>
+            {showLoginHint && <p className={styles.loginHint}>⚠️ Please login first to write a review!</p>}
           </div>
         )}
 
-        {/* Review form */}
         {showForm && (
           <div className={styles.form}>
             <h3 className={styles.formTitle}>Your Review</h3>
             <div className={styles.starPicker}>
               {STARS.map(s => (
-                <button
-                  key={s}
+                <button key={s}
                   className={`${styles.starBtn} ${s <= (hovered || rating) ? styles.starActive : ''}`}
-                  onMouseEnter={() => setHovered(s)}
-                  onMouseLeave={() => setHovered(0)}
-                  onClick={() => setRating(s)}
-                >★</button>
+                  onMouseEnter={() => setHovered(s)} onMouseLeave={() => setHovered(0)}
+                  onClick={() => setRating(s)}>★</button>
               ))}
               <span className={styles.ratingLabel}>
                 {(hovered || rating) === 1 && 'Poor 😞'}
@@ -130,23 +149,33 @@ export default function Reviews() {
                 {(hovered || rating) === 5 && 'Excellent! 🤩'}
               </span>
             </div>
-            <textarea
-              className={styles.textarea}
-              value={comment}
-              onChange={e => setComment(e.target.value)}
-              placeholder="Tell us about your experience... What did you order? How was the taste? 😋"
-              rows={4}
-            />
+            <textarea className={styles.textarea} value={comment} onChange={e => setComment(e.target.value)}
+              placeholder="Tell us about your experience... What did you order? How was the taste? 😋" rows={4} />
+
+            {/* Photo upload */}
+            <div className={styles.photoWrap}>
+              {photoPreview ? (
+                <div className={styles.previewWrap}>
+                  <img src={photoPreview} className={styles.preview} alt="preview" />
+                  <button className={styles.removePhoto} onClick={() => { setPhoto(null); setPhotoPreview(null) }}>✕ Remove</button>
+                </div>
+              ) : (
+                <button className={styles.uploadBtn} onClick={() => fileRef.current.click()}>
+                  📸 Add Food Photo (optional)
+                </button>
+              )}
+              <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handlePhotoChange} />
+            </div>
+
             <div className={styles.formBtns}>
               <button className={styles.cancelBtn} onClick={() => setShowForm(false)}>Cancel</button>
-              <button className={styles.submitBtn} onClick={submitReview} disabled={submitting}>
-                {submitting ? 'Submitting…' : '📤 Submit Review'}
+              <button className={styles.submitBtn} onClick={submitReview} disabled={submitting || uploading}>
+                {uploading ? 'Uploading photo…' : submitting ? 'Submitting…' : '📤 Submit Review'}
               </button>
             </div>
           </div>
         )}
 
-        {/* Reviews list */}
         {reviews.length === 0 ? (
           <div className={styles.empty}>
             <div className={styles.emptyIcon}>🌟</div>
@@ -171,6 +200,9 @@ export default function Reviews() {
                   </div>
                 </div>
                 <p className={styles.comment}>{r.comment}</p>
+                {r.photoUrl && (
+                  <img src={r.photoUrl} alt="food" className={styles.reviewPhoto} onClick={() => window.open(r.photoUrl, '_blank')} />
+                )}
               </div>
             ))}
           </div>

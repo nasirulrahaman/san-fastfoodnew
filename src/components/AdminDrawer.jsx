@@ -5,7 +5,8 @@ import {
   collection, getDocs, addDoc, deleteDoc,
   doc, setDoc, getDoc, serverTimestamp
 } from 'firebase/firestore'
-import styles from './AdminDrawer.module.css'
+import styles from "./AdminDrawer.module.css"
+import OrderTracker from "./OrderTracker"
 
 // Zomato-style notification templates
 const NOTIF_TEMPLATES = [
@@ -34,6 +35,7 @@ export default function AdminDrawer() {
   const [notifTitle, setNotifTitle] = useState('')
   const [notifBody, setNotifBody] = useState('')
   const [sending, setSending] = useState(false)
+  const [showTracker, setShowTracker] = useState(false)
 
   useEffect(() => {
     loadCoupons()
@@ -210,6 +212,14 @@ export default function AdminDrawer() {
           ))
         )}
       </div>
+      {/* Order Management */}
+      <div className={styles.card}>
+        <h3>📦 Order Management</h3>
+        <p className={styles.hint}>View and update all customer orders in real-time</p>
+        <button className={styles.btn} onClick={() => setShowTracker(true)}>📋 View All Orders</button>
+      </div>
+
+      {showTracker && <OrderTracker onClose={() => setShowTracker(false)} />}
     </>
   )
 }

@@ -1,0 +1,53 @@
+.tracker { max-height: 85vh; overflow-y: auto; }
+.tracker h2 { font-family: 'Fraunces', serif; font-size: 1.3rem; margin-bottom: 16px; }
+
+.empty { text-align: center; padding: 40px; color: var(--muted); }
+.emptyIcon { font-size: 3rem; margin-bottom: 10px; }
+
+.list { display: flex; flex-direction: column; gap: 16px; }
+
+.card {
+  background: #faf6f0; border-radius: 16px;
+  padding: 16px; border: 1.5px solid #f0e8e0;
+}
+
+.cardTop { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+.orderId { font-weight: 800; font-size: .88rem; color: var(--dark); display: block; }
+.date { font-size: .75rem; color: var(--muted); }
+
+.badge { font-size: .78rem; font-weight: 700; padding: 4px 12px; border-radius: 50px; }
+.pending { background: #fff3cd; color: #856404; }
+.preparing { background: #cff4fc; color: #055160; }
+.delivered { background: #d1e7dd; color: #0f5132; }
+
+/* Progress */
+.progress { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; position: relative; }
+.progressStep { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; position: relative; }
+.progressDot {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: #e8ddd4; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .3s; z-index: 1;
+}
+.progressDotActive { background: var(--red); color: #fff; box-shadow: 0 0 0 4px rgba(220,38,38,.15); }
+.progressLabel { font-size: .7rem; color: var(--muted); font-weight: 600; text-align: center; }
+.progressLabelActive { color: var(--red); }
+.progressLine {
+  position: absolute; top: 18px; left: 60%; right: -40%;
+  height: 3px; background: #e8ddd4; z-index: 0;
+}
+.progressLineActive { background: var(--red); }
+
+.customer { font-size: .8rem; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
+.items { border-top: 1.5px solid #f0e8e0; padding-top: 10px; display: flex; flex-direction: column; gap: 5px; }
+.item { display: flex; justify-content: space-between; font-size: .85rem; color: var(--dark); }
+.total { font-weight: 800; font-size: .9rem; border-top: 1.5px solid #f0e8e0; padding-top: 8px; margin-top: 4px; text-align: right; }
+
+.updateBtn {
+  width: 100%; margin-top: 12px;
+  background: var(--dark); color: #fff;
+  border: none; border-radius: 50px; padding: 11px;
+  font-size: .88rem; font-weight: 700; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: background .2s;
+}
+.updateBtn:hover { background: var(--brown); }

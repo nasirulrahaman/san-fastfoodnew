@@ -119,3 +119,27 @@
 .cardStars .starEmpty { font-size: .9rem; }
 .cardDate { font-size: .75rem; color: var(--muted); margin-left: auto; flex-shrink: 0; }
 .comment { font-size: .88rem; color: #4a3020; line-height: 1.65; }
+
+.photoWrap { margin-bottom: 12px; }
+.uploadBtn {
+  background: #faf6f0; border: 2px dashed #e8ddd4;
+  border-radius: 12px; padding: 12px 20px;
+  font-size: .88rem; font-weight: 600; cursor: pointer;
+  color: var(--muted); width: 100%; font-family: 'Outfit', sans-serif;
+  transition: all .2s;
+}
+.uploadBtn:hover { border-color: var(--red); color: var(--red); background: #fff5f3; }
+.previewWrap { position: relative; display: inline-block; }
+.preview { width: 100%; max-height: 200px; object-fit: cover; border-radius: 12px; }
+.removePhoto {
+  position: absolute; top: 8px; right: 8px;
+  background: rgba(0,0,0,.6); color: #fff;
+  border: none; border-radius: 20px; padding: 4px 10px;
+  font-size: .78rem; cursor: pointer; font-family: 'Outfit', sans-serif;
+}
+.reviewPhoto {
+  width: 100%; max-height: 180px; object-fit: cover;
+  border-radius: 12px; margin-top: 10px; cursor: pointer;
+  transition: opacity .2s;
+}
+.reviewPhoto:hover { opacity: .9; }
