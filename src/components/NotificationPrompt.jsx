@@ -17,10 +17,19 @@ export default function NotificationPrompt() {
   const handleEnable = () => {
     setVisible(false)
     localStorage.setItem('notif_prompt_shown', 'true')
-    // Trigger OneSignal permission prompt
-    if (window.OneSignalDeferred) {
-      window.OneSignalDeferred.push(async function(OneSignal) {
-        await OneSignal.Notifications.requestPermission()
+    // Trigger browser notification permission directly
+    if ('Notification' in window) {
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          // Re-init OneSignal to register the token
+          if (window.OneSignalDeferred) {
+            window.OneSignalDeferred.push(async function(OneSignal) {
+              try {
+                await OneSignal.Notifications.requestPermission()
+              } catch(e) {}
+            })
+          }
+        }
       })
     }
   }
