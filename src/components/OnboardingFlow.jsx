@@ -136,7 +136,7 @@ export default function OnboardingFlow() {
 
   useEffect(() => {
     // Don't show if already completed onboarding
-    if (localStorage.getItem('onboarding_done')) return
+    if (localStorage.getItem('onboarding_v2')) return
     // Show after 2 seconds
     const timer = setTimeout(() => {
       setStep('install')
@@ -146,7 +146,7 @@ export default function OnboardingFlow() {
   }, [])
 
   const finish = () => {
-    localStorage.setItem('onboarding_done', 'true')
+    localStorage.setItem('onboarding_v2', 'true')
     setVisible(false)
   }
 
