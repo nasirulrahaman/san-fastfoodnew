@@ -1,0 +1,117 @@
+.overlay {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(0,0,0,.6);
+  display: flex; align-items: flex-end;
+  animation: fadeIn .3s ease;
+}
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+
+.sheet {
+  width: 100%; max-width: 480px; margin: 0 auto;
+  background: #fff; border-radius: 28px 28px 0 0;
+  padding: 12px 0 32px;
+  animation: slideUp .4s cubic-bezier(.22,1,.36,1);
+}
+@keyframes slideUp {
+  from { transform: translateY(100%) }
+  to { transform: translateY(0) }
+}
+
+.dots {
+  display: flex; gap: 8px;
+  justify-content: center; margin-bottom: 4px;
+}
+.dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #e8ddd4; transition: all .3s;
+}
+.dotActive {
+  width: 24px; height: 8px; border-radius: 50px;
+  background: var(--red); transition: all .3s;
+}
+
+.card {
+  padding: 16px 24px 8px;
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center; gap: 10px;
+  position: relative;
+}
+
+.skip {
+  position: absolute; top: 0; right: 24px;
+  background: none; border: none;
+  color: var(--muted); font-size: .85rem;
+  cursor: pointer; font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+}
+
+.appIconWrap {
+  width: 80px; height: 80px;
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,.15);
+  margin: 8px 0;
+}
+.appIcon { width: 100%; height: 100%; object-fit: cover; }
+
+.stepIcon { font-size: 3rem; margin: 8px 0; }
+
+.card h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem; font-weight: 900;
+  color: var(--dark); margin: 0;
+}
+.card p {
+  color: var(--muted); font-size: .9rem;
+  line-height: 1.5; margin: 0;
+}
+
+.features {
+  display: flex; gap: 10px;
+  flex-wrap: wrap; justify-content: center;
+  margin: 4px 0;
+}
+.feature {
+  background: #faf6f0; border: 1.5px solid #f0e8e0;
+  border-radius: 50px; padding: 6px 14px;
+  font-size: .82rem; font-weight: 700;
+  color: var(--dark); display: flex; gap: 6px;
+}
+
+.input {
+  width: 100%; border: 1.5px solid #e8ddd4;
+  border-radius: 12px; padding: 13px 15px;
+  font-size: .95rem; outline: none;
+  transition: border-color .2s;
+  font-family: 'Outfit', sans-serif;
+  color: var(--dark);
+}
+.input:focus { border-color: var(--red); }
+
+.error { color: var(--red); font-size: .82rem; margin: -4px 0; }
+
+.primaryBtn {
+  width: 100%; background: var(--red); color: #fff;
+  border: none; border-radius: 50px;
+  padding: 15px; font-size: 1rem;
+  font-weight: 700; cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: background .2s; margin-top: 4px;
+}
+.primaryBtn:hover { background: var(--red2); }
+.primaryBtn:disabled { background: #ccc; cursor: not-allowed; }
+
+.secondaryBtn {
+  width: 100%; background: #f0e8e0; color: var(--muted);
+  border: none; border-radius: 50px;
+  padding: 13px; font-size: .9rem;
+  font-weight: 600; cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+}
+
+.note { font-size: .78rem; color: var(--muted); margin-top: -4px; }
+.alreadyNote { font-size: .82rem; color: var(--muted); }
+.link {
+  background: none; border: none; color: var(--red);
+  font-weight: 700; cursor: pointer; font-size: .82rem;
+  font-family: 'Outfit', sans-serif;
+}

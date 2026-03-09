@@ -19,7 +19,7 @@ export const menuData = {
     { name: 'Jeera Rice (with chicken 65)',        price: 70,  img: 'images/rice/jeera.jpg' },
   ],
   breakfast: [
-    { name: 'Rice Roti(2-pieces)',           price: 15,  img: 'images/breakfast/rice.jpg' },
+    { name: 'Rice Roti',           price: 5,  img: 'images/breakfast/rice.jpg' },
     { name: 'Masala Dosa',         price: 25, img: 'images/breakfast/m.jpg' },
     { name: 'Butter Naan',         price: 10, img: 'images/breakfast/butter.jpg' },
     { name: 'Idly (1 plate)',      price: 20, img: 'images/breakfast/idly.jpg' },
@@ -65,14 +65,14 @@ export const menuData = {
     { name: 'Papad',                  price: 5,  img: 'images/snacks/p.jpg' },
   ],
   rolls: [
-    { name: 'Spring Roll', price: 20, img: 'images/roll/spring.jpg' },
-    { name: 'Naan Roll',   price: 20, img: 'images/roll/naan.jpg' },
+    { name: 'Spring Roll', price: 15, img: 'images/roll/spring.jpg' },
+    { name: 'Naan Roll',   price: 15, img: 'images/roll/naan.jpg' },
     { name: 'Egg Roll',    price: 25, img: 'images/roll/egg.jpg' },
     { name: 'Crispy Roll', price: 25, img: 'images/roll/crispy.jpg' },
   ],
   drinks: [
     { name: 'Tea',    price: 5,  img: 'images/drinks/t.jpg' },
-    { name: 'Coffee', price: 25, img: 'images/drinks/c.jpg' },
+    { name: 'Coffee', price: 10, img: 'images/drinks/c.jpg' },
     { name: 'Lassi',  price: 30, img: 'images/drinks/l.jpg' },
   ],
   pizza: [

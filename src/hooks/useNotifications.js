@@ -3,7 +3,7 @@ import { messaging, getToken, onMessage } from '../firebase'
 import { db } from '../firebase'
 import { doc, setDoc } from 'firebase/firestore'
 
-const VAPID_KEY = 'BMZ-BeA75eKAKVgAmnoG5bVoQwY2xFAh9Vn95psilvBM3ZOZPyQdcClIR4HptxP0jLNAoJRW9CFWKmiTJmEsctM' // Replace with your VAPID key from Firebase Console
+const VAPID_KEY = 'YOUR_VAPID_KEY_HERE' // Replace with your VAPID key from Firebase Console
 
 export function useNotifications(user) {
   useEffect(() => {

@@ -7,8 +7,7 @@ import DrawerManager from './components/DrawerManager'
 import FloatingCart from './components/FloatingCart'
 import Footer from './components/Footer'
 import Toast from './components/Toast'
-import NotificationPrompt from './components/NotificationPrompt'
-import InstallPrompt from './components/InstallPrompt'
+import OnboardingFlow from './components/OnboardingFlow'
 import { useNotifications } from './hooks/useNotifications'
 import './index.css'
 
@@ -25,8 +24,7 @@ function AppInner() {
       <DrawerManager />
       <FloatingCart />
       <Toast />
-      <NotificationPrompt />
-      <InstallPrompt />
+      <OnboardingFlow />
     </>
   )
 }
