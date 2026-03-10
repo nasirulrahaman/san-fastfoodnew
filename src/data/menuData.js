@@ -15,7 +15,7 @@ export const menuData = {
     { name: 'Egg Biryani',                         price: 70,  img: 'images/rice/egg-biryani.jpg' },
     { name: 'Chicken Biryani (with egg)',           price: 110, img: 'images/rice/withegg.jpg' },
     { name: 'Lemon Rice (with chicken 65)',         price: 80,  img: 'images/rice/lemon.jpg' },
-    { name: 'Tomato Rice (with chicken 65 & egg)', price: 90,  img: 'images/rice/tomato-rice.jpg' },
+    { name: 'Tomato Rice (with chicken 65 )', price: 90,  img: 'images/rice/tomato-rice.jpg' },
     { name: 'Jeera Rice (with chicken 65)',        price: 70,  img: 'images/rice/jeera.jpg' },
   ],
   breakfast: [
